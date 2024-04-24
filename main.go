@@ -12,7 +12,7 @@ import (
 
 func main() {
 	client := notion.NewClient(os.Getenv("NOTION_TOKEN"))
-	databaseID := os.Getenv("NOTION_DATABASE_ID") // Ensure this is set in your environment
+	databaseID := os.Getenv("NOTION_DATABASE_ID") 
 
 	reader := bufio.NewReader(os.Stdin)
 
@@ -20,6 +20,8 @@ func main() {
 	fmt.Print("Enter the title for the new database entry: ")
 	inputTitle, _ := reader.ReadString('\n')
 	inputTitle = strings.TrimSpace(inputTitle)
+
+	
 
 	// Prompt for and read the content
 	fmt.Print("Enter the content for the new database entry: ")
@@ -48,14 +50,9 @@ func main() {
 				},
 			},
 		},
-		// Optionally, specify other properties like Color or add Children blocks
+		// option to specify color or children blocks at a later date 
 	}
 
-	// Since the `Children` field in `CreatePageParams` expects a slice of `Block` interfaces,
-	// and assuming the `ParagraphBlock` satisfies this interface, you might need to handle
-	// the conversion or directly use a slice of `ParagraphBlock` if the library allows.
-
-	// Assuming `CreatePageParams` allows for directly setting `ParagraphBlock` as children:
 	children := []notion.Block{&paragraphBlock}
 
 	// Create the new page with the specified properties and content block
